@@ -1,10 +1,17 @@
 // Styles
 import "./App.css";
 
+// Components
+import { SignUp } from "./components";
+
 // Routes
 
 function App() {
-  return <div className="App">let's go 🚀</div>;
+  return (
+    <div className="App">
+      <SignUp />
+    </div>
+  );
 }
 
 export default App;
