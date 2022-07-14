@@ -15,7 +15,7 @@ const BasicInput = ({
         type={type}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
-        className="bg-transparent  border-none outline-none text-base text-white w-full"
+        className="bg-transparent  border-none outline-none text-base text-white w-full focus:bg-transparent"
       />
     </div>
   );
