@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 // Components
 import BasicInput from "../Common/BasicInput/BasicInput";
 
 const SignUp = () => {
+  const location = useLocation();
+  console.log("from signup----", location);
   const [signValue, setSignValue] = useState({
     name: "",
     email: "",
@@ -32,7 +35,7 @@ const SignUp = () => {
     setSignValue({ name: "", email: "", password: "" });
   };
   return (
-    <div className="bg-black h-screen w-full flex items-center justify-center">
+    <div className="h-screen w-full flex items-center justify-center">
       <div className="border-4 border-red-600 w-1/3 h-4/5 rounded-xl py-6 px-10 flex items-center justify-center flex-col">
         <div className="text-2xl font-medium text-red-600 text-center">
           Sign Up
