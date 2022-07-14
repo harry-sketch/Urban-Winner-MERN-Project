@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import BasicInput from "../Common/BasicInput/BasicInput";
 
 const SignUp = () => {
-  const location = useLocation();
-  console.log("from signup----", location);
   const [signValue, setSignValue] = useState({
     name: "",
     email: "",
@@ -14,6 +12,8 @@ const SignUp = () => {
   });
 
   const { name, email, password } = signValue;
+
+  const navigate = useNavigate();
 
   // Func
   const handleChange = (e) => {
@@ -32,6 +32,8 @@ const SignUp = () => {
     });
     const data = await res.json();
     console.log(data);
+    localStorage.setItem("user", JSON.stringify(data));
+    navigate("/product");
     setSignValue({ name: "", email: "", password: "" });
   };
   return (
