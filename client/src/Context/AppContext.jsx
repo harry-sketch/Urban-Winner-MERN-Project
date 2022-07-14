@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const AppContext = createContext();
 
@@ -6,8 +6,16 @@ const AppProvider = ({ children }) => {
   const [toast, setToast] = useState([]);
 
   // Funs
-  const addToast = (newToast) => {
-    setToast((prev) => [...prev, newToast]);
+
+  const addToast = (text, type) => {
+    setToast((prev) => [
+      ...prev,
+      { id: Math.floor(Math.random() * 10), text, type },
+    ]);
+
+    setTimeout(() => {
+      removeToast();
+    }, 3000);
   };
 
   const removeToast = (id) => {
