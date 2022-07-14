@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Custom  Hooks
+import useEcom from "../../hooks/useEcom";
+
 // Components
 import BasicInput from "../Common/BasicInput/BasicInput";
 
@@ -15,7 +18,10 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
+  const { addToast } = useEcom();
+
   // Func
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSignValue((prev) => ({ ...prev, [name]: value }));
@@ -33,6 +39,7 @@ const SignUp = () => {
     const data = await res.json();
     console.log(data);
     localStorage.setItem("user", JSON.stringify(data));
+    addToast("msg send Successfully !!", "success");
     navigate("/product");
     setSignValue({ name: "", email: "", password: "" });
   };
