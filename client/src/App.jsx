@@ -19,7 +19,7 @@ import Toast from "./components/Common/Toast/Toast";
 function App() {
   const location = useLocation();
   return (
-    <div className="bg-[#0E0E0E] relative">
+    <div className="relative">
       {location.pathname !== "/" && <Header />}
       <Routes>
         <Route path="/" element={<SignUp />} />
