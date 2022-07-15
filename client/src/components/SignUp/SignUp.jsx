@@ -49,35 +49,34 @@ const SignUp = () => {
         <div className="text-2xl font-medium text-red-600 text-center">
           Sign Up
         </div>
-        <form method="Post" onClick={(e) => handleSubmit(e)}>
-          <BasicInput
-            type="text"
-            name="name"
-            placeholder="Username"
-            value={name}
-            onChange={(e) => handleChange(e)}
-          />
-          <BasicInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => handleChange(e)}
-          />
-          <BasicInput
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => handleChange(e)}
-          />
-          <button
-            type="submit"
-            className="text-white bg-red-600 py-4 w-52 text-center cursor-pointer flex items-center justify-center hover:bg-red-500 transition-all duration-300 text-base font-medium"
-          >
-            Sign Up
-          </button>
-        </form>
+        <BasicInput
+          type="text"
+          name="name"
+          placeholder="Username"
+          value={name}
+          onChange={(e) => handleChange(e)}
+        />
+        <BasicInput
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => handleChange(e)}
+        />
+        <BasicInput
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => handleChange(e)}
+        />
+        <button
+          type="button"
+          className="text-white bg-red-600 py-4 w-52 text-center cursor-pointer flex items-center justify-center hover:bg-red-500 transition-all duration-300 text-base font-medium"
+          onClick={handleSubmit}
+        >
+          Sign Up
+        </button>
       </div>
     </div>
   );
