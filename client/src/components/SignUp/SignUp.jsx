@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Custom  Hooks
@@ -38,12 +39,12 @@ const SignUp = () => {
     });
 
     const data = await res.json();
-    console.log(data);
     localStorage.setItem("user", JSON.stringify(data));
     addToast("Sign Up successfully!", "success");
     navigate("/product");
     setSignValue({ name: "", email: "", password: "" });
   };
+
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-r from-[#E1B2CC] to-[#F4F4F7]">
       <SignUpLeft
