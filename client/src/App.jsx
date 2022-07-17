@@ -11,6 +11,7 @@ import {
   Header,
   Profile,
   PrivateComponent,
+  Login,
 } from "./components";
 import Toast from "./components/Common/Toast/Toast";
 
@@ -18,15 +19,18 @@ import Toast from "./components/Common/Toast/Toast";
 
 function App() {
   const location = useLocation();
+  const isNotHeader = ["/", "/login"];
   return (
     <div className="relative">
-      {location.pathname !== "/" && <Header />}
+      {!isNotHeader.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/product" element={<Product />} />
         <Route path="/update" element={<Update />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
+
       <Toast />
     </div>
   );
