@@ -9,7 +9,7 @@ const Header = () => {
     { id: 4, title: "Logout", link: "/" },
   ];
   return (
-    <nav className="flex w-full bg-[#191919] text-[#B0AEAE] px-[5%] py-[1%] max-w-7xl m-auto shadow-xl relative">
+    <nav className="flex w-full bg-gradient-to-r from-[#E1B2CC] to-[#F4F4F7]  px-[5%] py-[1%]  shadow-xl relative text-white">
       <ul className="flex items-center justify-between w-2/4">
         {navdata &&
           navdata.map((item) => {
