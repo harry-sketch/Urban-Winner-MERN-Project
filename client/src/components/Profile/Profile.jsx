@@ -1,7 +1,12 @@
 import React from "react";
 
-const Profile = () => (
-  <div className="max-w-7xl m-auto bg-[#212121]">Profle</div>
-);
+const Profile = () => {
+  const user = JSON.parse(localStorage.getItem("user")).name;
+  return (
+    <div>
+      <span className="capitalize"> Hello,😃 {user}</span>
+    </div>
+  );
+};
 
 export default Profile;
