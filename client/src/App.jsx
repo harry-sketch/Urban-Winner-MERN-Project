@@ -25,9 +25,11 @@ function App() {
       {!isNotHeader.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" element={<SignUp />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/update" element={<Update />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<PrivateComponent />}>
+          <Route path="/product" element={<Product />} />
+          <Route path="/update" element={<Update />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
 
