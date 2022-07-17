@@ -17,8 +17,24 @@ app.use(express.json());
 app.post("/signUp", async (req, res) => {
   const user = new userModel(req.body);
   const data = await user.save();
-  console.log(data);
-  res.send(data);
+  const result = data.toObject();
+  delete result.password;
+  console.log(result);
+  res.send(result);
+});
+
+// Login Api
+app.post("/logIn", async (req, res) => {
+  if (req.body.email && req.body.password) {
+    const data = await userModel.findOne(req.body).select(" -password");
+    console.log(data);
+    if (data) {
+      return res.send(data);
+    }
+    return res.send("No User Found !!");
+  } else {
+    res.send("No User Found !!");
+  }
 });
 
 //Add products Api
