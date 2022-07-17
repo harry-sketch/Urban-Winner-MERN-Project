@@ -12,6 +12,7 @@ import {
   Profile,
   PrivateComponent,
   Login,
+  AddProduct,
 } from "./components";
 import Toast from "./components/Common/Toast/Toast";
 
@@ -28,6 +29,7 @@ function App() {
         <Route element={<PrivateComponent />}>
           <Route path="/product" element={<Product />} />
           <Route path="/update" element={<Update />} />
+          <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/login" element={<Login />} />
