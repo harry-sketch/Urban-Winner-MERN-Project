@@ -25,6 +25,7 @@ app.post("/signUp", async (req, res) => {
 app.post("/addProduct", async (req, res) => {
   const product = new productModel(req.body);
   const data = await product.save();
+  console.log(data);
   res.send(data);
 });
 
