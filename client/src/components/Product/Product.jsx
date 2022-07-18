@@ -11,7 +11,7 @@ const Product = () => {
   const getProducts = async () => {
     const res = await fetch("http://localhost:4443/product", {
       headers: {
-        authorization: JSON.parse(localStorage.getItem("token")),
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     const data = await res.json();
@@ -23,6 +23,9 @@ const Product = () => {
   const deleteItem = async (id) => {
     const res = await fetch(`http://localhost:4443/delete/${id}`, {
       method: "Delete",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
     });
 
     const data = await res.json();
@@ -38,6 +41,9 @@ const Product = () => {
     }
     const res = await fetch(`http://localhost:4443/search/${searchTerm}`, {
       method: "Get",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
     });
     const data = await res.json();
     console.log(data);
