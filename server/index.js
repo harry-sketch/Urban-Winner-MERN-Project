@@ -15,6 +15,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (token) {
+    const finalToken = token.split(" ")[1];
+    Jwt.verify(finalToken, jwtKey, (err, valid) => {
+      if (err) {
+        res.status(401).send("please enter valid token ");
+      } else {
+        next();
+      }
+    });
+  } else {
+    res.status(403).send("Token not found");
+  }
+};
+
 // Sign Up Api
 app.post("/signUp", async (req, res) => {
   const user = new userModel(req.body);
@@ -50,13 +66,13 @@ app.post("/logIn", async (req, res) => {
 });
 
 // Products Api
-app.get("/product", async (req, res) => {
+app.get("/product", verifyToken, async (req, res) => {
   const data = await productModel.find();
   res.send(data);
 });
 
 //Add products Api
-app.post("/addProduct", async (req, res) => {
+app.post("/addProduct", verifyToken, async (req, res) => {
   const product = new productModel(req.body);
   const data = await product.save();
   console.log(data);
@@ -64,13 +80,13 @@ app.post("/addProduct", async (req, res) => {
 });
 
 // Update Products
-app.get("/update/:id", async (req, res) => {
+app.get("/update/:id", verifyToken, async (req, res) => {
   const data = await productModel.findOne({ _id: req.params.id });
   console.log(data);
   res.send(data);
 });
 
-app.put("/update/:id", async (req, res) => {
+app.put("/update/:id", verifyToken, async (req, res) => {
   const data = await productModel.updateOne(
     { _id: req.params.id },
     {
@@ -81,7 +97,7 @@ app.put("/update/:id", async (req, res) => {
 });
 
 // Delete Products
-app.delete("/delete/:id", async (req, res) => {
+app.delete("/delete/:id", verifyToken, async (req, res) => {
   const data = await productModel.deleteOne({ _id: req.params.id });
   res.send(data);
 });

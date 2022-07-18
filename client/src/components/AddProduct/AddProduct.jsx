@@ -34,6 +34,7 @@ const AdddProduct = () => {
         body: JSON.stringify(addProduct),
         headers: {
           "Content-Type": "application/json",
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
       const data = await res.json();

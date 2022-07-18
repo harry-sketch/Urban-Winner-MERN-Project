@@ -31,6 +31,9 @@ const Update = () => {
   const updateProducts = async () => {
     const res = await fetch(`http://localhost:4443/update/${params.id}`, {
       method: "Get",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
     });
     const data = await res.json();
     setUpdateProduct({
@@ -49,6 +52,7 @@ const Update = () => {
       body: JSON.stringify(updateProduct),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
 
