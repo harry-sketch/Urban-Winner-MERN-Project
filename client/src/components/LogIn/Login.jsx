@@ -36,12 +36,12 @@ const Login = () => {
     });
     const data = await res.json();
     console.log(data);
-    if (data) {
+    if (data.name) {
       localStorage.setItem("user", JSON.stringify(data));
       addToast("Logged In successfully !!", "success");
       navigate("/product");
       setLogIn({ email: "", password: "" });
-    } else {
+    } else if (!data.name) {
       addToast("No uSer  Found !!!", "warning");
     }
   };
