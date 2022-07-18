@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const user = JSON.parse(localStorage.getItem("user")).name;
+  console.log(JSON.parse(localStorage.getItem("user")));
 
   const navdata = [
     { id: 1, title: "Product", link: "/product" },
