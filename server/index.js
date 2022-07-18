@@ -42,6 +42,7 @@ app.post("/logIn", async (req, res) => {
         res.send("something went wrong !!");
       } else {
         res.send(res.send({ data, auth: token }));
+
       }
     });
   } else {
