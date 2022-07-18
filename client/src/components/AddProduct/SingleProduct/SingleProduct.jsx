@@ -1,6 +1,11 @@
 import BasicInput from "../../Common/BasicInput/BasicInput";
 
-const SingleProduct = ({ handleChange, addProduct, handleAddProducts }) => {
+const SingleProduct = ({
+  handleChange,
+  addProduct,
+  handleAddProducts,
+  text,
+}) => {
   const { model, price, category, company } = addProduct;
 
   return (
@@ -38,7 +43,7 @@ const SingleProduct = ({ handleChange, addProduct, handleAddProducts }) => {
         type="button"
         onClick={handleAddProducts}
       >
-        Add Product
+        {text}
       </button>
     </div>
   );
