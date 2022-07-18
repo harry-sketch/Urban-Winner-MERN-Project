@@ -48,10 +48,11 @@ const AdddProduct = () => {
   return (
     <div className="h-[90%] w-full flex items-center justify-center bg-gradient-to-r from-[#E1B2CC] to-[#F4F4F7] pt-2 py-4">
       <div className="bg-white w-3/4 h-full rounded-lg  shadow-lg flex flex-col items-start">
-        <AddProductHeader />
+        <AddProductHeader text="Add Products" />
         <SingleProduct
           handleChange={handleChange}
           addProduct={addProduct}
+          text="Add Product"
           handleAddProducts={handleAddProducts}
         />
       </div>

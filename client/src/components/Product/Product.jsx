@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CommonIcons from "../../Assets/CommonIcons";
 
 const Product = () => {
   const [productsList, setProductsList] = useState([]);
   useEffect(() => {
     getProducts();
-    console.log(productsList);
   }, []);
 
   const getProducts = async () => {
     const res = await fetch("http://localhost:4443/product");
     const data = await res.json();
-    console.log(data);
     setProductsList(data);
+  };
+
+  const sortedList = productsList.sort((a, b) => (a.price < b.price ? -1 : 1));
+
+  const deleteItem = async (id) => {
+    const res = await fetch(`http://localhost:4443/delete/${id}`, {
+      method: "Delete",
+    });
+
+    const data = await res.json();
+    if (data) {
+      getProducts();
+    }
   };
 
   return (
@@ -25,8 +37,8 @@ const Product = () => {
         <div className="text-black text-xl font-semibold mb-4">Action</div>
       </div>
 
-      {productsList.length > 0 ? (
-        productsList.map((item) => (
+      {sortedList.length > 0 ? (
+        sortedList.map((item) => (
           <div
             className="flex items-start justify-between w-full"
             key={item._id}
@@ -42,10 +54,16 @@ const Product = () => {
               {item.company}
             </div>
             <div className="flex items-start gap-2">
-              <div className="bg-blue-400 cursor-pointer rounded-md">
+              <Link
+                className="bg-blue-400 indexcursor-pointer rounded-md"
+                to={`/update/${item._id}`}
+              >
                 {CommonIcons.edit}
-              </div>
-              <div className="bg-red-400 cursor-pointer rounded-md ">
+              </Link>
+              <div
+                className="bg-red-400 cursor-pointer rounded-md"
+                onClick={() => deleteItem(item._id)}
+              >
                 {CommonIcons.trash}
               </div>
             </div>
