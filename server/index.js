@@ -51,4 +51,27 @@ app.post("/addProduct", async (req, res) => {
   res.send(data);
 });
 
+// Update Products
+app.get("/update/:id", async (req, res) => {
+  const data = await productModel.findOne({ _id: req.params.id });
+  console.log(data);
+  res.send(data);
+});
+
+app.put("/update/:id", async (req, res) => {
+  const data = await productModel.updateOne(
+    { _id: req.params.id },
+    {
+      $set: req.body,
+    }
+  );
+  res.send(data);
+});
+
+// Delete Products
+app.delete("/delete/:id", async (req, res) => {
+  const data = await productModel.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
 app.listen(port);
