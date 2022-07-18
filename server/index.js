@@ -42,7 +42,6 @@ app.post("/logIn", async (req, res) => {
         res.send("something went wrong !!");
       } else {
         res.send(res.send({ data, auth: token }));
-
       }
     });
   } else {
@@ -88,7 +87,7 @@ app.delete("/delete/:id", async (req, res) => {
 });
 
 // Search Api
-app.get("/search/:name", async (req, res) => {
+app.get("/search/:name", verifyToken, async (req, res) => {
   const data = await productModel.find({
     $or: [
       { model: { $regex: req.params.name } },

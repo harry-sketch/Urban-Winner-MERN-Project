@@ -39,7 +39,9 @@ const SignUp = () => {
     });
 
     const data = await res.json();
-    localStorage.setItem("user", JSON.stringify(data));
+    console.log(data);
+    localStorage.setItem("user", JSON.stringify(data.result));
+    localStorage.setItem("token", JSON.stringify(data.auth));
     addToast("Sign Up successfully!", "success");
     navigate("/product");
     setSignValue({ name: "", email: "", password: "" });
