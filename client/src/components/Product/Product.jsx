@@ -53,7 +53,6 @@ const Product = () => {
         ))
       ) : (
         <h1 className="text-black font-semibold text-xl">
-          {" "}
           No Products Found !!
         </h1>
       )}
