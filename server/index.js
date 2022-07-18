@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const Jwt = require("jsonwebtoken");
 require("./db/config/config");
 const port = 4443;
+const jwtKey = "e-com";
 
 // Models
 const userModel = require("./db/User/user"); //UserModel
@@ -19,21 +21,31 @@ app.post("/signUp", async (req, res) => {
   const data = await user.save();
   const result = data.toObject();
   delete result.password;
+  if (result) {
+    Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+      if (err) {
+        res.send("something went wromg !!");
+      } else {
+        res.send({ result, auth: token });
+      }
+    });
+  }
   console.log(result);
-  res.send(result);
 });
 
 // Login Api
 app.post("/logIn", async (req, res) => {
-  if (req.body.email && req.body.password) {
-    const data = await userModel.findOne(req.body).select(" -password");
-    console.log(data);
-    if (data) {
-      return res.send(data);
-    }
-    return res.send("No User Found !!");
+  const data = await userModel.findOne(req.body).select(" -password");
+  if (data) {
+    Jwt.sign({ data }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+      if (err) {
+        res.send("something went wrong !!");
+      } else {
+        res.send(res.send({ data, auth: token }));
+      }
+    });
   } else {
-    res.send("No User Found !!");
+    res.send("no user found");
   }
 });
 
@@ -71,6 +83,19 @@ app.put("/update/:id", async (req, res) => {
 // Delete Products
 app.delete("/delete/:id", async (req, res) => {
   const data = await productModel.deleteOne({ _id: req.params.id });
+  res.send(data);
+});
+
+// Search Api
+app.get("/search/:name", async (req, res) => {
+  const data = await productModel.find({
+    $or: [
+      { model: { $regex: req.params.name } },
+      { company: { $regex: req.params.name } },
+      { category: { $regex: req.params.name } },
+    ],
+  });
+  console.log(data);
   res.send(data);
 });
 
