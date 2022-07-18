@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
   model: String,
-  price: Number,
+  price: String,
   category: String,
   company: String,
 });
