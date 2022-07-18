@@ -37,6 +37,12 @@ app.post("/logIn", async (req, res) => {
   }
 });
 
+// Products Api
+app.get("/product", async (req, res) => {
+  const data = await productModel.find();
+  res.send(data);
+});
+
 //Add products Api
 app.post("/addProduct", async (req, res) => {
   const product = new productModel(req.body);
